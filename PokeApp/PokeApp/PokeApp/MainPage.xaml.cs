@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace PokeApp
 {
@@ -18,15 +19,16 @@ namespace PokeApp
     public partial class MainPage : ContentPage
     {
 
-        public Pokemon Pokemon { get; set; }
         private static HttpClient HttpClient
            = new HttpClient() { BaseAddress = new Uri("https://pokeapi.co/api/v2/") };
+
+        public ObservableCollection<Result> Results { get; set; }
 
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = this;
             GetPokemon();
+            BindingContext = this;
         }
 
         public async void GetPokemon()
@@ -35,6 +37,7 @@ namespace PokeApp
             pokemonResponse.EnsureSuccessStatusCode();
             var responseBody = await pokemonResponse.Content.ReadAsStringAsync();
             var pokemon = JsonConvert.DeserializeObject<Pokemon>(responseBody);
+            Results = new ObservableCollection<Result>(pokemon.Results);
         }
     }
 }
