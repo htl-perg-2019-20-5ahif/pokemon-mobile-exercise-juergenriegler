@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              x:Class="PokeApp.App">
     <Application.Resources>
-
+     
     </Application.Resources>
 </Application>

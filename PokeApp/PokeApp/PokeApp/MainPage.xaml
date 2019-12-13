@@ -8,7 +8,8 @@
              Title="PokeApp"
              >
     <StackLayout>
-        <ListView ItemsSource="{Binding Results}">
+        <Button Text="Load" Clicked="LoadPokemonButtonClicked" />
+        <ListView ItemsSource="{Binding Path=Pokemon}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

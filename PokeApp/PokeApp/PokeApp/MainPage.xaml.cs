@@ -27,8 +27,9 @@ namespace PokeApp
         public MainPage()
         {
             InitializeComponent();
-            GetPokemon();
             BindingContext = this;
+            this.Results = new ObservableCollection<Result>();
+            GetPokemon();
         }
 
         public async void GetPokemon()
@@ -38,6 +39,11 @@ namespace PokeApp
             var responseBody = await pokemonResponse.Content.ReadAsStringAsync();
             var pokemon = JsonConvert.DeserializeObject<Pokemon>(responseBody);
             Results = new ObservableCollection<Result>(pokemon.Results);
+        }
+
+        private void LoadPokemonButtonClicked(object sender, EventArgs e)
+        {
+            GetPokemon();
         }
     }
 }
